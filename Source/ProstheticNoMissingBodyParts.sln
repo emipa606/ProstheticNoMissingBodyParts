@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProstheticNoMissingBodyParts", "ProstheticNoMissingBodyParts.csproj", "{0CA4DD4E-EB71-4A52-ADEF-E1949E2D3D45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProstheticNoMissingBodyParts", "ProstheticNoMissingBodyParts\ProstheticNoMissingBodyParts.csproj", "{0CA4DD4E-EB71-4A52-ADEF-E1949E2D3D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

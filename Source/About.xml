@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Prosthetic No Missing Body Parts</name>
+  <author>iamrespawn</author>
+  <supportedVersions>
+    <li>1.1</li>
+  </supportedVersions>
+  <packageId>com.prostheticnomissingbodyparts.rimworld.mod</packageId>
+  <url>https://github.com/RimworldFixes/ProstheticNoMissingBodyParts</url>
+  <description>This mod allow your pawns with bionic arms and legs continue wearing any gear for feet and hands.
+
+Works with vanilla, EPOE, VAE, Jewelry, AVP (gauntlets), etc. Does not require new save game. Can be removed any time.
+
+This mod does not change body part groups and do not try to connect fingers and hands to torso directly like as [KV] Keep Hands and Feet - 1.1
+
+Instead of this, this mod patch original Rimworld ApparelUtility method "HasPartsToWear" on the fly.
+If your pawn has two bionic legs, it cannot wear boots by default. This happens cause game remove all feet, when you try to install bionic upgrade on your legs.
+When original game code return that pawn does not have any body part for wearing boots or gloves (negative check), patch code starts and try to find any bionic body part on upper levels, like Bionic Arm or Bionic Leg.
+If any bionic part exists in right place, patch change original result value to positive. And your pawn can continue wearing any gear on their hands, feet, etc...
+
+Allowed arm replacement:
+- SimpleProstheticArm
+- BionicArm
+- AdvancedBionicArm
+- ArchotechArm
+
+Allowed leg replacement:
+- SimpleProstheticLeg
+- BionicLeg
+- AdvancedBionicLeg
+- ArchotechLeg
+- MuscleStimulatorLegs
+
+Why not all replacements are allowed by default?
+For example you could still wearing you gloves with Bionic Arms, but not with some kind of simple prosthetic, like wooden hand. Can you wear gloves on wooden hand? I think no. For balance purpose only. You can change settings of allowed replacement any time in mod settings. And yes, you can allow all replacement, if you want this. Reloading does not required.
+
+Please, locate this mod in the end part of your mod list. After all othe mods that adds bionic parts.
+
+Compatibility
+- Must be compatible with all other mod, exclude mods that do the same patch as this mod.
+- Tested with 100+ mods, including EPOE, VAE, Jewelry, AVP (gauntlets), etc...
+- Does not test with any CE mods, cause I does not use CE in my games.
+- HarmonyLib Required.      
+    </description>
+  <modDependenciesByVersion>
+    <v1.0 />
+    <v1.1>
+      <li>
+        <packageId>brrainz.harmony</packageId>
+        <displayName>Harmony</displayName>
+        <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+        <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+      </li>
+    </v1.1>
+  </modDependenciesByVersion>
+  <incompatibleWith />
+  <loadBefore />
+  <loadAfterByVersion>
+    <v1.0 />
+    <v1.1>
+      <li>brrainz.harmony</li>
+    </v1.1>
+  </loadAfterByVersion>
+</ModMetaData>
