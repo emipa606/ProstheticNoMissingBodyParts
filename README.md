@@ -6,6 +6,7 @@ Update of iamrespawns mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
 
 - Replaced the destructive Harmony prefix with a postfix instead to increase compatibility
+- Verified working in CE
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 

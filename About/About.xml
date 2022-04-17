@@ -19,12 +19,14 @@
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
+    <li>syrchalis.prosthetictable</li>
   </loadAfter>
   <description>[img]https://i.imgur.com/buuPQel.png[/img]
 Update of iamrespawns mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
 
 - Replaced the destructive Harmony prefix with a postfix instead to increase compatibility
+- Verified working in CE
 
 [img]https://i.imgur.com/pufA0kM.png[/img]
 
