@@ -1,5 +1,8 @@
 # Changelog for ProstheticNoMissingBodyParts
 
+1.3.3 - Added hands and feet to options as well.
+
+
 1.3.2 - Added load-order definitions for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1473332565][SYR] Prosthetic Table[/url]
 
 

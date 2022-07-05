@@ -31,6 +31,8 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         // prepare hash sets for quicker checks
         var armsWhitelist = new HashSet<string>();
         var legsWhitelist = new HashSet<string>();
+        var handsWhitelist = new HashSet<string>();
+        var feetWhitelist = new HashSet<string>();
 
         // for arms
         if (settings.ArmsWhitelist != null)
@@ -42,6 +44,18 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         if (settings.LegsWhitelist != null)
         {
             legsWhitelist.AddRange(settings.LegsWhitelist);
+        }
+
+        // for hands
+        if (settings.HandsWhitelist != null)
+        {
+            handsWhitelist.AddRange(settings.HandsWhitelist);
+        }
+
+        // for feet
+        if (settings.FeetWhitelist != null)
+        {
+            feetWhitelist.AddRange(settings.FeetWhitelist);
         }
 
         // prepare bool set for apparel body part groups
@@ -97,11 +111,22 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         {
             __result = hediffs.Exists(h =>
             {
-                if (h.Part?.customLabel != null && h.def?.defName != null)
+                if (h.Part?.customLabel == null || h.def?.defName == null)
                 {
-                    // true if left arm replaced with whitelisted bionic part
-                    return h.Part.def.defName.Equals("Shoulder") &&
-                           armsWhitelist.Contains(h.def.defName) &&
+                    return false;
+                }
+
+                // true if left arm replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Shoulder"))
+                {
+                    return armsWhitelist.Contains(h.def.defName) &&
+                           BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
+                }
+
+                // true if left hand replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Hand"))
+                {
+                    return handsWhitelist.Contains(h.def.defName) &&
                            BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
                 }
 
@@ -115,11 +140,22 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         {
             __result = hediffs.Exists(h =>
             {
-                if (h.Part?.customLabel != null && h.def?.defName != null)
+                if (h.Part?.customLabel == null || h.def?.defName == null)
                 {
-                    // true if any right arm replaced with whitelisted bionic part
-                    return h.Part.def.defName.Equals("Shoulder") &&
-                           armsWhitelist.Contains(h.def.defName) &&
+                    return false;
+                }
+
+                // true if right arm replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Shoulder"))
+                {
+                    return armsWhitelist.Contains(h.def.defName) &&
+                           BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
+                }
+
+                // true if right hand replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Hand"))
+                {
+                    return handsWhitelist.Contains(h.def.defName) &&
                            BodyPartUtils.ExistsDeep(h.Part, "RightHand");
                 }
 
@@ -133,11 +169,21 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         {
             __result = hediffs.Exists(h =>
             {
-                if (h.Part?.def?.defName != null && h.def?.defName != null)
+                if (h.Part?.def?.defName == null || h.def?.defName == null)
                 {
-                    // true if any arm replaced with whitelisted bionic part
-                    return h.Part.def.defName.Equals("Shoulder") &&
-                           armsWhitelist.Contains(h.def.defName);
+                    return false;
+                }
+
+                // true if arm replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Shoulder"))
+                {
+                    return armsWhitelist.Contains(h.def.defName);
+                }
+
+                // true if hand replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Hand"))
+                {
+                    return handsWhitelist.Contains(h.def.defName);
                 }
 
                 return false;
@@ -150,11 +196,21 @@ internal static class Patch_ApparelUtility_HasPartsToWear
         {
             __result = hediffs.Exists(h =>
             {
-                if (h.Part?.def?.defName != null && h.def?.defName != null)
+                if (h.Part?.def?.defName == null || h.def?.defName == null)
                 {
-                    // true if any leg replaced with whitelisted bionic part
-                    return h.Part.def.defName.Equals("Leg") &&
-                           legsWhitelist.Contains(h.def.defName);
+                    return false;
+                }
+
+                // true if leg replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Leg"))
+                {
+                    return legsWhitelist.Contains(h.def.defName);
+                }
+
+                // true if foot replaced with whitelisted bionic part
+                if (h.Part.def.defName.Equals("Foot"))
+                {
+                    return feetWhitelist.Contains(h.def.defName);
                 }
 
                 return false;

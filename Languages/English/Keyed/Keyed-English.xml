@@ -2,5 +2,7 @@
 <LanguageData>
   <ProstheticNoMissingBodyPartsModName>Prosthetic No Missing Body Parts</ProstheticNoMissingBodyPartsModName>
   <ProstheticNoMissingBodyPartsWhitelistedArmsName>Allowed arm replacement</ProstheticNoMissingBodyPartsWhitelistedArmsName>
+  <ProstheticNoMissingBodyPartsWhitelistedHandsName>Allowed hand replacement</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>Allowed leg replacement</ProstheticNoMissingBodyPartsWhitelistedLegsName>
+  <ProstheticNoMissingBodyPartsWhitelistedFeetName>Allowed foot replacement</ProstheticNoMissingBodyPartsWhitelistedFeetName>
 </LanguageData>
