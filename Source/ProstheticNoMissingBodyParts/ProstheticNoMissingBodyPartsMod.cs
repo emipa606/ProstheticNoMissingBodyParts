@@ -18,6 +18,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     private readonly Dictionary<string, bool[]> _legsWhitelistMap = new Dictionary<string, bool[]>();
     private readonly ProstheticNoMissingBodyPartsSettings _settings;
 
+
     private string _armSearchQuery = "";
 
     private Vector2 _armsViewScroll = new Vector2(0, 0);
@@ -138,7 +139,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             }
 
             // catch arm
-            if (recipeDef.appliedOnFixedBodyParts.Exists(x => x.defName.Equals("Shoulder")))
+            if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.ShoulderDefNames.Contains(x.defName)))
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Shoulder {recipeDef.addsHediff.defName}");
                 _armsWhitelistMap[recipeDef.addsHediff.defName] =
@@ -147,7 +148,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             }
 
             // catch hand
-            if (recipeDef.appliedOnFixedBodyParts.Exists(x => x.defName.Equals("Hand")))
+            if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.HandDefNames.Contains(x.defName)))
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Hand {recipeDef.addsHediff.defName}");
                 _handsWhitelistMap[recipeDef.addsHediff.defName] =
@@ -156,7 +157,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             }
 
             // catch leg
-            if (recipeDef.appliedOnFixedBodyParts.Exists(x => x.defName.Equals("Leg")))
+            if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.LegDefNames.Contains(x.defName)))
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Leg {recipeDef.addsHediff.defName}");
                 _legsWhitelistMap[recipeDef.addsHediff.defName] =
@@ -165,7 +166,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             }
 
             // catch foot
-            if (recipeDef.appliedOnFixedBodyParts.Exists(x => x.defName.Equals("Foot")))
+            if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.FootDefNames.Contains(x.defName)))
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Foot {recipeDef.addsHediff.defName}");
                 _feetWhitelistMap[recipeDef.addsHediff.defName] =
