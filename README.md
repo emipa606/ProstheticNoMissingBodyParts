@@ -8,6 +8,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
 - Replaced the destructive Harmony prefix with a postfix instead to increase compatibility
 - Added settings for hand and feet-bionics
 - Verified working in CE
+- Added support for https://steamcommunity.com/sharedfiles/filedetails/?id=1386412863]Android tiers.
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 

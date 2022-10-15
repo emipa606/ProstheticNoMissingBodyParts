@@ -98,11 +98,13 @@ internal static class Patch_ApparelUtility_HasPartsToWear
                 break;
             }
 
-            if (BodyPartUtils.ExistsByGroupAndParent(body, "Leg", g.defName))
+            if (!BodyPartUtils.ExistsByGroupAndParent(body, "Leg", g.defName))
             {
-                isFeet = true;
-                break;
+                continue;
             }
+
+            isFeet = true;
+            break;
         }
 
         var hediffs = p.health.hediffSet.hediffs;
@@ -181,12 +183,8 @@ internal static class Patch_ApparelUtility_HasPartsToWear
                 }
 
                 // true if hand replaced with whitelisted bionic part
-                if (HarmonyPatches.HandDefNames.Contains(h.Part.def.defName))
-                {
-                    return handsWhitelist.Contains(h.def.defName);
-                }
-
-                return false;
+                return HarmonyPatches.HandDefNames.Contains(h.Part.def.defName) &&
+                       handsWhitelist.Contains(h.def.defName);
             });
             return;
         }
@@ -208,12 +206,8 @@ internal static class Patch_ApparelUtility_HasPartsToWear
                 }
 
                 // true if foot replaced with whitelisted bionic part
-                if (HarmonyPatches.FootDefNames.Contains(h.Part.def.defName))
-                {
-                    return feetWhitelist.Contains(h.def.defName);
-                }
-
-                return false;
+                return HarmonyPatches.FootDefNames.Contains(h.Part.def.defName) &&
+                       feetWhitelist.Contains(h.def.defName);
             });
             return;
         }

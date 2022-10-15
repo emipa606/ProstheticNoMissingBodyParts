@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mlie;
 using UnityEngine;
 using Verse;
 
@@ -7,6 +8,7 @@ namespace ProstheticNoMissingBodyParts;
 public class ProstheticNoMissingBodyPartsMod : Mod
 {
     private static ProstheticNoMissingBodyPartsMod _mod;
+    private static string currentVersion;
 
     private readonly List<HediffDef> _armsHediff = new List<HediffDef>();
     private readonly Dictionary<string, bool[]> _armsWhitelistMap = new Dictionary<string, bool[]>();
@@ -35,6 +37,9 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     {
         _settings = GetSettings<ProstheticNoMissingBodyPartsSettings>();
         _mod = this;
+        currentVersion =
+            VersionFromManifest.GetVersionFromModMetaData(
+                ModLister.GetActiveModWithIdentifier("Mlie.ProstheticNoMissingBodyParts"));
     }
 
     public override void WriteSettings()
@@ -182,9 +187,16 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
         var listingStandard = new Listing_Standard();
 
+        if (currentVersion != null)
+        {
+            GUI.contentColor = Color.gray;
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 25f),
+                "ProstheticNoMissingBodyPartsCurrentModVersion".Translate(currentVersion));
+            GUI.contentColor = Color.white;
+        }
 
         // arms settings GUI
-        var armsGroup = new Rect(inRect.x, inRect.y, inRect.width, 128f);
+        var armsGroup = new Rect(inRect.x, inRect.y + 25, inRect.width, 128f);
         var armsSearchRect = new Rect(inRect.width - 200f, armsGroup.y, 200f, 24f);
 
         _armSearchQuery = Widgets.TextArea(armsSearchRect, _armSearchQuery);
@@ -220,7 +232,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
         Widgets.EndScrollView();
 
         // hands settings GUI
-        var handsGroup = new Rect(inRect.x, inRect.y + 150f, inRect.width, 128f);
+        var handsGroup = new Rect(inRect.x, inRect.y + 170f, inRect.width, 128f);
         var handsSearchRect = new Rect(inRect.width - 200f, handsGroup.y, 200f, 24f);
 
         _handsSearchQuery = Widgets.TextArea(handsSearchRect, _handsSearchQuery);
@@ -257,7 +269,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
 
         // legs setting GUI
-        var legsGroup = new Rect(inRect.x, inRect.y + 300, inRect.width, 128f);
+        var legsGroup = new Rect(inRect.x, inRect.y + 315, inRect.width, 128f);
         var legsSearchRect = new Rect(inRect.width - 200f, legsGroup.y, 200f, 24f);
 
         _legSearchQuery = Widgets.TextArea(legsSearchRect, _legSearchQuery);
@@ -293,7 +305,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
 
         // feet setting GUI
-        var feetGroup = new Rect(inRect.x, inRect.y + 450f, inRect.width, 128f);
+        var feetGroup = new Rect(inRect.x, inRect.y + 460f, inRect.width, 128f);
         var feetSearchRect = new Rect(inRect.width - 200f, feetGroup.y, 200f, 24f);
 
         _feetSearchQuery = Widgets.TextArea(feetSearchRect, _feetSearchQuery);
