@@ -37,9 +37,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     {
         _settings = GetSettings<ProstheticNoMissingBodyPartsSettings>();
         _mod = this;
-        currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.ProstheticNoMissingBodyParts"));
+        currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     public override void WriteSettings()
