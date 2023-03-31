@@ -12,28 +12,32 @@ public static class HarmonyPatches
     {
         "Foot",
         "LeftMechanicalFoot",
-        "RightMechanicalFoot"
+        "RightMechanicalFoot",
+        "ATR_MechanicalFoot"
     };
 
     public static readonly List<string> HandDefNames = new List<string>
     {
         "Hand",
         "LeftMechanicalHand",
-        "RightMechanicalHand"
+        "RightMechanicalHand",
+        "ATR_MechanicalHand"
     };
 
     public static readonly List<string> LegDefNames = new List<string>
     {
         "Leg",
         "LeftMechanicalLeg",
-        "RightMechanicalLeg"
+        "RightMechanicalLeg",
+        "ATR_MechanicalLeg"
     };
 
     public static readonly List<string> ShoulderDefNames = new List<string>
     {
         "Shoulder",
         "LeftMechanicalShoulder",
-        "RightMechanicalShoulder"
+        "RightMechanicalShoulder",
+        "ATR_MechanicalShoulder"
     };
 
     static HarmonyPatches()
