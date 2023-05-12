@@ -8,7 +8,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
 - Replaced the destructive Harmony prefix with a postfix instead to increase compatibility
 - Added settings for hand and feet-bionics
 - Verified working in CE
-- Added support for https://steamcommunity.com/sharedfiles/filedetails/?id=1386412863]Android tiers.
+- Added support for https://steamcommunity.com/sharedfiles/filedetails/?id=1386412863]Android tiers/https://steamcommunity.com/sharedfiles/filedetails/?id=2917948202]Android Tiers Reforged.
 
 ![Image](https://i.imgur.com/pufA0kM.png)
 
@@ -74,5 +74,4 @@ For people who hate that pawns can't wear boots with bionic upgrades.
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353]Last updated 2023-03-31
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353]Last updated 2023-05-12

@@ -1,5 +1,8 @@
 # Changelog for ProstheticNoMissingBodyParts
 
+1.4.3 - Fixed the options menu to be more readable
+
+
 1.4.2 - Added compatibility with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2917948202]Android Tiers Reforged[/url], thanks MajikalExplosions.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 

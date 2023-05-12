@@ -19,19 +19,9 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     private readonly List<HediffDef> _legsHediff = new List<HediffDef>();
     private readonly Dictionary<string, bool[]> _legsWhitelistMap = new Dictionary<string, bool[]>();
     private readonly ProstheticNoMissingBodyPartsSettings _settings;
-
-
-    private string _armSearchQuery = "";
-
-    private Vector2 _armsViewScroll = new Vector2(0, 0);
-    private string _feetSearchQuery = "";
-    private Vector2 _feetViewScroll = new Vector2(0, 0);
-    private string _handsSearchQuery = "";
-    private Vector2 _handsViewScroll = new Vector2(0, 0);
+    private Vector2 _allViewScroll = new Vector2(0, 0);
 
     private bool _isInitialized;
-    private string _legSearchQuery = "";
-    private Vector2 _legsViewScroll = new Vector2(0, 0);
 
     public ProstheticNoMissingBodyPartsMod(ModContentPack content) : base(content)
     {
@@ -183,40 +173,15 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     {
         Init();
 
+        var allHolder = new Rect(inRect.x, inRect.y + 25, inRect.width, inRect.height - 25);
+        var allView = new Rect(allHolder.x, allHolder.y, allHolder.width - 24f,
+            ((_armsHediff.Count + _handsHediff.Count + _legsHediff.Count + _feetHediff.Count) * 24f) + 200);
+
         var listingStandard = new Listing_Standard();
-
-        if (currentVersion != null)
-        {
-            GUI.contentColor = Color.gray;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 25f),
-                "ProstheticNoMissingBodyPartsCurrentModVersion".Translate(currentVersion));
-            GUI.contentColor = Color.white;
-        }
-
-        // arms settings GUI
-        var armsGroup = new Rect(inRect.x, inRect.y + 25, inRect.width, 128f);
-        var armsSearchRect = new Rect(inRect.width - 200f, armsGroup.y, 200f, 24f);
-
-        _armSearchQuery = Widgets.TextArea(armsSearchRect, _armSearchQuery);
-        var armSearchQueryIsEmpty = _armSearchQuery.NullOrEmpty();
-
-        listingStandard.Begin(armsGroup);
+        Widgets.BeginScrollView(allHolder, ref _allViewScroll, allView);
+        listingStandard.Begin(allView);
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedArmsName".Translate());
-        listingStandard.End();
-
-        var filteredArms = _armsHediff.FindAll(x =>
-            armSearchQueryIsEmpty ||
-            x.defName.ToLower().Contains(_armSearchQuery.ToLower()) ||
-            x.label.ToLower().Contains(_armSearchQuery.ToLower())
-        );
-
-        var armsHolder = new Rect(armsGroup.x, armsGroup.y + 30, armsGroup.width, armsGroup.height - 30f);
-        var armsView = new Rect(armsHolder.x, armsHolder.y, armsGroup.width - 24f, filteredArms.Count * 24f);
-
-        Widgets.BeginScrollView(armsHolder, ref _armsViewScroll, armsView);
-        listingStandard.Begin(armsView);
-
-        foreach (var hediffDef in filteredArms)
+        foreach (var hediffDef in _armsHediff)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -226,33 +191,8 @@ public class ProstheticNoMissingBodyPartsMod : Mod
         }
 
         listingStandard.GapLine();
-        listingStandard.End();
-        Widgets.EndScrollView();
-
-        // hands settings GUI
-        var handsGroup = new Rect(inRect.x, inRect.y + 170f, inRect.width, 128f);
-        var handsSearchRect = new Rect(inRect.width - 200f, handsGroup.y, 200f, 24f);
-
-        _handsSearchQuery = Widgets.TextArea(handsSearchRect, _handsSearchQuery);
-        var handSearchQueryIsEmpty = _handsSearchQuery.NullOrEmpty();
-
-        listingStandard.Begin(handsGroup);
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedHandsName".Translate());
-        listingStandard.End();
-
-        var filteredHands = _handsHediff.FindAll(x =>
-            handSearchQueryIsEmpty ||
-            x.defName.ToLower().Contains(_handsSearchQuery.ToLower()) ||
-            x.label.ToLower().Contains(_handsSearchQuery.ToLower())
-        );
-
-        var handsHolder = new Rect(handsGroup.x, handsGroup.y + 30, handsGroup.width, handsGroup.height - 30f);
-        var handsView = new Rect(handsHolder.x, handsHolder.y, handsGroup.width - 24f, filteredHands.Count * 24f);
-
-        Widgets.BeginScrollView(handsHolder, ref _handsViewScroll, handsView);
-        listingStandard.Begin(handsView);
-
-        foreach (var hediffDef in filteredHands)
+        foreach (var hediffDef in _handsHediff)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -262,34 +202,8 @@ public class ProstheticNoMissingBodyPartsMod : Mod
         }
 
         listingStandard.GapLine();
-        listingStandard.End();
-        Widgets.EndScrollView();
-
-
-        // legs setting GUI
-        var legsGroup = new Rect(inRect.x, inRect.y + 315, inRect.width, 128f);
-        var legsSearchRect = new Rect(inRect.width - 200f, legsGroup.y, 200f, 24f);
-
-        _legSearchQuery = Widgets.TextArea(legsSearchRect, _legSearchQuery);
-        var legSearchQueryIsEmpty = _legSearchQuery.NullOrEmpty();
-
-        listingStandard.Begin(legsGroup);
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedLegsName".Translate());
-        listingStandard.End();
-
-        var filteredLegs = _legsHediff.FindAll(x =>
-            legSearchQueryIsEmpty ||
-            x.defName.ToLower().Contains(_legSearchQuery.ToLower()) ||
-            x.label.ToLower().Contains(_legSearchQuery.ToLower())
-        );
-
-        var legsHolder = new Rect(legsGroup.x, legsGroup.y + 30, legsGroup.width, legsGroup.height - 30f);
-        var legsView = new Rect(legsHolder.x, legsHolder.y, legsGroup.width - 24f, filteredLegs.Count * 24f);
-
-        Widgets.BeginScrollView(legsHolder, ref _legsViewScroll, legsView);
-        listingStandard.Begin(legsView);
-
-        foreach (var hediffDef in filteredLegs)
+        foreach (var hediffDef in _legsHediff)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -298,40 +212,24 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             );
         }
 
-        listingStandard.End();
-        Widgets.EndScrollView();
+        listingStandard.GapLine();
 
-
-        // feet setting GUI
-        var feetGroup = new Rect(inRect.x, inRect.y + 460f, inRect.width, 128f);
-        var feetSearchRect = new Rect(inRect.width - 200f, feetGroup.y, 200f, 24f);
-
-        _feetSearchQuery = Widgets.TextArea(feetSearchRect, _feetSearchQuery);
-        var feetSearchQueryIsEmpty = _feetSearchQuery.NullOrEmpty();
-
-        listingStandard.Begin(feetGroup);
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedFeetName".Translate());
-        listingStandard.End();
-
-        var filteredFeet = _feetHediff.FindAll(x =>
-            feetSearchQueryIsEmpty ||
-            x.defName.ToLower().Contains(_feetSearchQuery.ToLower()) ||
-            x.label.ToLower().Contains(_feetSearchQuery.ToLower())
-        );
-
-        var feetHolder = new Rect(feetGroup.x, feetGroup.y + 30, feetGroup.width, feetGroup.height - 30f);
-        var feetView = new Rect(feetHolder.x, feetHolder.y, feetGroup.width - 24f, filteredFeet.Count * 24f);
-
-        Widgets.BeginScrollView(feetHolder, ref _feetViewScroll, feetView);
-        listingStandard.Begin(feetView);
-
-        foreach (var hediffDef in filteredFeet)
+        foreach (var hediffDef in _feetHediff)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
                 ref _feetWhitelistMap[hediffDef.defName][0],
                 hediffDef.description
             );
+        }
+
+        listingStandard.GapLine();
+        if (currentVersion != null)
+        {
+            GUI.contentColor = Color.gray;
+            listingStandard.Label("ProstheticNoMissingBodyPartsCurrentModVersion".Translate(currentVersion));
+            GUI.contentColor = Color.white;
         }
 
         listingStandard.End();
