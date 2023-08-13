@@ -151,7 +151,7 @@ internal static class Patch_ApparelUtility_HasPartsToWear
                 if (HarmonyPatches.ShoulderDefNames.Contains(h.Part.def.defName))
                 {
                     return armsWhitelist.Contains(h.def.defName) &&
-                           BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
+                           BodyPartUtils.ExistsDeep(h.Part, "RightHand");
                 }
 
                 // true if right hand replaced with whitelisted bionic part
