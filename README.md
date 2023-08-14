@@ -74,4 +74,4 @@ For people who hate that pawns can't wear boots with bionic upgrades.
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353]Last updated 2023-05-12
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353]Last updated 2023-08-14

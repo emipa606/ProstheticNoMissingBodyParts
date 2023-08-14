@@ -1,5 +1,8 @@
 # Changelog for ProstheticNoMissingBodyParts
 
+1.4.4 - Fixes an issue with things worn on the right hand. Thanks MrMatsay for the fix!
+
+
 1.4.3 - Fixed the options menu to be more readable
 
 
