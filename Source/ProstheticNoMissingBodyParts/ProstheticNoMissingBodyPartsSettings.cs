@@ -6,34 +6,34 @@ namespace ProstheticNoMissingBodyParts;
 public class ProstheticNoMissingBodyPartsSettings : ModSettings
 {
     // default whitelisted arms, Vanilla and EPOE
-    public List<string> ArmsWhitelist = new List<string>
-    {
+    public List<string> ArmsWhitelist =
+    [
         "SimpleProstheticArm",
         "BionicArm",
         "AdvancedBionicArm",
         "ArchotechArm"
-    };
+    ];
 
-    public List<string> FeetWhitelist = new List<string>
-    {
+    public List<string> FeetWhitelist =
+    [
         "SimpleProstheticLeg",
         "BionicLeg",
         "AdvancedBionicLeg",
         "ArchotechLeg",
         "MuscleStimulatorLegs"
-    };
+    ];
 
-    public List<string> HandsWhitelist = new List<string>();
+    public List<string> HandsWhitelist = [];
 
     // default whitelisted legs, Vanilla and EPOE
-    public List<string> LegsWhitelist = new List<string>
-    {
+    public List<string> LegsWhitelist =
+    [
         "SimpleProstheticLeg",
         "BionicLeg",
         "AdvancedBionicLeg",
         "ArchotechLeg",
         "MuscleStimulatorLegs"
-    };
+    ];
 
     public override void ExposeData()
     {

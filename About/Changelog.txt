@@ -1,5 +1,8 @@
 # Changelog for ProstheticNoMissingBodyParts
 
+1.5.0 - Mod updated for 1.5 and passed autotests
+
+
 1.4.4 - Fixes an issue with things worn on the right hand. Thanks MrMatsay for the fix!
 
 

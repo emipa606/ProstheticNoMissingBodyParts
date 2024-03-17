@@ -10,13 +10,13 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     private static ProstheticNoMissingBodyPartsMod _mod;
     private static string currentVersion;
 
-    private readonly List<HediffDef> _armsHediff = new List<HediffDef>();
+    private readonly List<HediffDef> _armsHediff = [];
     private readonly Dictionary<string, bool[]> _armsWhitelistMap = new Dictionary<string, bool[]>();
-    private readonly List<HediffDef> _feetHediff = new List<HediffDef>();
+    private readonly List<HediffDef> _feetHediff = [];
     private readonly Dictionary<string, bool[]> _feetWhitelistMap = new Dictionary<string, bool[]>();
-    private readonly List<HediffDef> _handsHediff = new List<HediffDef>();
+    private readonly List<HediffDef> _handsHediff = [];
     private readonly Dictionary<string, bool[]> _handsWhitelistMap = new Dictionary<string, bool[]>();
-    private readonly List<HediffDef> _legsHediff = new List<HediffDef>();
+    private readonly List<HediffDef> _legsHediff = [];
     private readonly Dictionary<string, bool[]> _legsWhitelistMap = new Dictionary<string, bool[]>();
     private readonly ProstheticNoMissingBodyPartsSettings _settings;
     private Vector2 _allViewScroll = new Vector2(0, 0);
@@ -99,22 +99,22 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
         if (_mod._settings.ArmsWhitelist == null)
         {
-            _mod._settings.ArmsWhitelist = new List<string>();
+            _mod._settings.ArmsWhitelist = [];
         }
 
         if (_mod._settings.HandsWhitelist == null)
         {
-            _mod._settings.HandsWhitelist = new List<string>();
+            _mod._settings.HandsWhitelist = [];
         }
 
         if (_mod._settings.LegsWhitelist == null)
         {
-            _mod._settings.LegsWhitelist = new List<string>();
+            _mod._settings.LegsWhitelist = [];
         }
 
         if (_mod._settings.FeetWhitelist == null)
         {
-            _mod._settings.FeetWhitelist = new List<string>();
+            _mod._settings.FeetWhitelist = [];
         }
 
         // sets for checkboxes default checks
@@ -136,7 +136,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Shoulder {recipeDef.addsHediff.defName}");
                 _armsWhitelistMap[recipeDef.addsHediff.defName] =
-                    new[] { currentArmsSet.Contains(recipeDef.addsHediff.defName) };
+                    [currentArmsSet.Contains(recipeDef.addsHediff.defName)];
                 _armsHediff.Add(recipeDef.addsHediff);
             }
 
@@ -145,7 +145,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Hand {recipeDef.addsHediff.defName}");
                 _handsWhitelistMap[recipeDef.addsHediff.defName] =
-                    new[] { currentHandsSet.Contains(recipeDef.addsHediff.defName) };
+                    [currentHandsSet.Contains(recipeDef.addsHediff.defName)];
                 _handsHediff.Add(recipeDef.addsHediff);
             }
 
@@ -154,7 +154,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Leg {recipeDef.addsHediff.defName}");
                 _legsWhitelistMap[recipeDef.addsHediff.defName] =
-                    new[] { currentLegsSet.Contains(recipeDef.addsHediff.defName) };
+                    [currentLegsSet.Contains(recipeDef.addsHediff.defName)];
                 _legsHediff.Add(recipeDef.addsHediff);
             }
 
@@ -163,7 +163,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             {
                 Log.Message($"[ProstheticNoMissingBodyParts] Add Foot {recipeDef.addsHediff.defName}");
                 _feetWhitelistMap[recipeDef.addsHediff.defName] =
-                    new[] { currentFeetSet.Contains(recipeDef.addsHediff.defName) };
+                    [currentFeetSet.Contains(recipeDef.addsHediff.defName)];
                 _feetHediff.Add(recipeDef.addsHediff);
             }
         }

@@ -8,37 +8,37 @@ namespace ProstheticNoMissingBodyParts;
 [StaticConstructorOnStartup]
 public static class HarmonyPatches
 {
-    public static readonly List<string> FootDefNames = new List<string>
-    {
+    public static readonly List<string> FootDefNames =
+    [
         "Foot",
         "LeftMechanicalFoot",
         "RightMechanicalFoot",
         "ATR_MechanicalFoot"
-    };
+    ];
 
-    public static readonly List<string> HandDefNames = new List<string>
-    {
+    public static readonly List<string> HandDefNames =
+    [
         "Hand",
         "LeftMechanicalHand",
         "RightMechanicalHand",
         "ATR_MechanicalHand"
-    };
+    ];
 
-    public static readonly List<string> LegDefNames = new List<string>
-    {
+    public static readonly List<string> LegDefNames =
+    [
         "Leg",
         "LeftMechanicalLeg",
         "RightMechanicalLeg",
         "ATR_MechanicalLeg"
-    };
+    ];
 
-    public static readonly List<string> ShoulderDefNames = new List<string>
-    {
+    public static readonly List<string> ShoulderDefNames =
+    [
         "Shoulder",
         "LeftMechanicalShoulder",
         "RightMechanicalShoulder",
         "ATR_MechanicalShoulder"
-    };
+    ];
 
     static HarmonyPatches()
     {
