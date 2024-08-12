@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <ProstheticNoMissingBodyPartsCurrentModVersion>Versión del mod instalada: {0}</ProstheticNoMissingBodyPartsCurrentModVersion>
+  <ProstheticNoMissingBodyPartsModName>Prótesis Sin Partes del Cuerpo Faltantes</ProstheticNoMissingBodyPartsModName>
+  <ProstheticNoMissingBodyPartsWhitelistedArmsName>Reemplazo de brazo permitido</ProstheticNoMissingBodyPartsWhitelistedArmsName>
+  <ProstheticNoMissingBodyPartsWhitelistedHandsName>Reemplazo de mano permitido</ProstheticNoMissingBodyPartsWhitelistedHandsName>
+  <ProstheticNoMissingBodyPartsWhitelistedLegsName>Reemplazo de pierna permitido</ProstheticNoMissingBodyPartsWhitelistedLegsName>
+  <ProstheticNoMissingBodyPartsWhitelistedFeetName>Reemplazo de pie permitido</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+</LanguageData>

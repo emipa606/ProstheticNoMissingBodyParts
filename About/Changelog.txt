@@ -1,5 +1,12 @@
 # Changelog for ProstheticNoMissingBodyParts
 
+1.5.2 - Updated spanish translation, thanks Ferchu
+
+
+1.5.1 - Updated spanish translation, thanks Ferchu
+Used DeepL to update translations for Spanish
+
+
 1.5.0 - Mod updated for 1.5 and passed autotests
 
 
