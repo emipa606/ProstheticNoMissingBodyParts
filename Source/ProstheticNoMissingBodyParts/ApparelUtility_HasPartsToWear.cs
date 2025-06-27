@@ -6,8 +6,8 @@ using Verse;
 namespace ProstheticNoMissingBodyParts;
 
 [Harmony]
-[HarmonyPatch(typeof(ApparelUtility), "HasPartsToWear")]
-internal static class Patch_ApparelUtility_HasPartsToWear
+[HarmonyPatch(typeof(ApparelUtility), nameof(ApparelUtility.HasPartsToWear))]
+internal static class ApparelUtility_HasPartsToWear
 {
     private static void Postfix(ref bool __result, Pawn p, ThingDef apparel)
     {

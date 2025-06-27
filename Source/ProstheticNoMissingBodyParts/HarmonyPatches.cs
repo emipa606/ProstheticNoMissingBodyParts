@@ -42,7 +42,6 @@ public static class HarmonyPatches
 
     static HarmonyPatches()
     {
-        var harmony = new Harmony("com.prostheticnomissingbodyparts.rimworld.mod");
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        new Harmony("com.prostheticnomissingbodyparts.rimworld.mod").PatchAll(Assembly.GetExecutingAssembly());
     }
 }
