@@ -7,4 +7,6 @@
   <ProstheticNoMissingBodyPartsWhitelistedHandsName>Remplacement autorisé de la main</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>Remplacement de la jambe autorisé</ProstheticNoMissingBodyPartsWhitelistedLegsName>
   <ProstheticNoMissingBodyPartsWhitelistedFeetName>Remplacement autorisé du pied</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+  <ProstheticNoMissingBodyPartsSearch>Recherche</ProstheticNoMissingBodyPartsSearch>
+  <ProstheticNoMissingBodyPartsSearchTT>Filtre sur bionic name, defname et modname</ProstheticNoMissingBodyPartsSearchTT>
 </LanguageData>

@@ -1,6 +1,6 @@
 # [Prosthetic No Missing Body Parts (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2739055353)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of iamrespawns mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
@@ -10,9 +10,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2103563425
 - Verified working in CE
 - Added support for [Android tiers](https://steamcommunity.com/sharedfiles/filedetails/?id=1386412863)/[Android Tiers Reforged](https://steamcommunity.com/sharedfiles/filedetails/?id=2917948202).
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 This mod allow your pawns with bionic arms and legs continue wearing any gear for feet and hands.
 
@@ -61,13 +61,13 @@ Then same happens with Jewelry with bracelets and mood debuff... It was the last
 
 For people who hate that pawns can't wear boots with bionic upgrades.
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -75,4 +75,4 @@ For people who hate that pawns can't wear boots with bionic upgrades.
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/ProstheticNoMissingBodyParts?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353) | tags: bionics, hands, feet
+[![Image](https://img.shields.io/github/v/release/emipa606/ProstheticNoMissingBodyParts?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2739055353) | tags: bionics, feet, hands

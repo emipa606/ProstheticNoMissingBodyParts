@@ -7,4 +7,6 @@
   <ProstheticNoMissingBodyPartsWhitelistedHandsName>允许替换的手</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>允许的腿部置换</ProstheticNoMissingBodyPartsWhitelistedLegsName>
   <ProstheticNoMissingBodyPartsWhitelistedFeetName>允许替换的脚</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+  <ProstheticNoMissingBodyPartsSearch>搜索</ProstheticNoMissingBodyPartsSearch>
+  <ProstheticNoMissingBodyPartsSearchTT>根据仿生名称、定义名称和模式名称进行筛选</ProstheticNoMissingBodyPartsSearchTT>
 </LanguageData>

@@ -6,4 +6,6 @@
   <ProstheticNoMissingBodyPartsWhitelistedHandsName>Allowed hand replacement</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>Allowed leg replacement</ProstheticNoMissingBodyPartsWhitelistedLegsName>
   <ProstheticNoMissingBodyPartsWhitelistedFeetName>Allowed foot replacement</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+  <ProstheticNoMissingBodyPartsSearch>Search</ProstheticNoMissingBodyPartsSearch>
+  <ProstheticNoMissingBodyPartsSearchTT>Filter on bionic name, defname and modname</ProstheticNoMissingBodyPartsSearchTT>
 </LanguageData>

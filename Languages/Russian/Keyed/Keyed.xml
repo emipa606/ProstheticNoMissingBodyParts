@@ -7,4 +7,6 @@
   <ProstheticNoMissingBodyPartsWhitelistedHandsName>Разрешенная замена рук</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>Разрешенная замена ноги</ProstheticNoMissingBodyPartsWhitelistedLegsName>
   <ProstheticNoMissingBodyPartsWhitelistedFeetName>Разрешенная замена стопы</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+  <ProstheticNoMissingBodyPartsSearch>Поиск</ProstheticNoMissingBodyPartsSearch>
+  <ProstheticNoMissingBodyPartsSearchTT>Фильтр по имени бионика, defname и modname</ProstheticNoMissingBodyPartsSearchTT>
 </LanguageData>

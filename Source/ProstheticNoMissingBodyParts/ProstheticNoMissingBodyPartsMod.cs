@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mlie;
 using UnityEngine;
 using Verse;
@@ -22,6 +24,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     private Vector2 allViewScroll = new(0, 0);
 
     private bool isInitialized;
+    private string searchText = string.Empty;
 
     public ProstheticNoMissingBodyPartsMod(ModContentPack content) : base(content)
     {
@@ -32,8 +35,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
     public override void WriteSettings()
     {
-        Log.Message("[ProstheticNoMissingBodyParts] Save settings");
-
         if (mod.settings.ArmsWhitelist != null)
         {
             mod.settings.ArmsWhitelist.Clear();
@@ -95,8 +96,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
         isInitialized = true;
 
-        Log.Message("[ProstheticNoMissingBodyParts] Init Settings");
-
         mod.settings.ArmsWhitelist ??= [];
 
         mod.settings.HandsWhitelist ??= [];
@@ -122,7 +121,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             // catch arm
             if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.ShoulderDefNames.Contains(x.defName)))
             {
-                Log.Message($"[ProstheticNoMissingBodyParts] Add Shoulder {recipeDef.addsHediff.defName}");
                 armsWhitelistMap[recipeDef.addsHediff.defName] =
                     [currentArmsSet.Contains(recipeDef.addsHediff.defName)];
                 armsHediff.Add(recipeDef.addsHediff);
@@ -131,7 +129,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             // catch hand
             if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.HandDefNames.Contains(x.defName)))
             {
-                Log.Message($"[ProstheticNoMissingBodyParts] Add Hand {recipeDef.addsHediff.defName}");
                 handsWhitelistMap[recipeDef.addsHediff.defName] =
                     [currentHandsSet.Contains(recipeDef.addsHediff.defName)];
                 handsHediff.Add(recipeDef.addsHediff);
@@ -140,7 +137,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             // catch leg
             if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.LegDefNames.Contains(x.defName)))
             {
-                Log.Message($"[ProstheticNoMissingBodyParts] Add Leg {recipeDef.addsHediff.defName}");
                 legsWhitelistMap[recipeDef.addsHediff.defName] =
                     [currentLegsSet.Contains(recipeDef.addsHediff.defName)];
                 legsHediff.Add(recipeDef.addsHediff);
@@ -149,7 +145,6 @@ public class ProstheticNoMissingBodyPartsMod : Mod
             // catch foot
             if (recipeDef.appliedOnFixedBodyParts.Exists(x => HarmonyPatches.FootDefNames.Contains(x.defName)))
             {
-                Log.Message($"[ProstheticNoMissingBodyParts] Add Foot {recipeDef.addsHediff.defName}");
                 feetWhitelistMap[recipeDef.addsHediff.defName] =
                     [currentFeetSet.Contains(recipeDef.addsHediff.defName)];
                 feetHediff.Add(recipeDef.addsHediff);
@@ -161,15 +156,41 @@ public class ProstheticNoMissingBodyPartsMod : Mod
     {
         init();
 
+        var searchTextBoxRect = new Rect(inRect.x, inRect.y, inRect.width, 25);
+        searchText = Widgets.TextEntryLabeled(searchTextBoxRect, "ProstheticNoMissingBodyPartsSearch".Translate(),
+            searchText);
+        TooltipHandler.TipRegion(searchTextBoxRect, "ProstheticNoMissingBodyPartsSearchTT".Translate());
+
+        var armsFiltered = armsHediff.Where(def =>
+            string.IsNullOrEmpty(searchText) ||
+            def.label.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.defName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.modContentPack?.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+        var handsFiltered = handsHediff.Where(def =>
+            string.IsNullOrEmpty(searchText) ||
+            def.label.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.defName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.modContentPack?.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+        var legsFiltered = legsHediff.Where(def =>
+            string.IsNullOrEmpty(searchText) ||
+            def.label.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.defName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.modContentPack?.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+        var feetFiltered = feetHediff.Where(def =>
+            string.IsNullOrEmpty(searchText) ||
+            def.label.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.defName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            def.modContentPack?.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0);
+
         var allHolder = new Rect(inRect.x, inRect.y + 25, inRect.width, inRect.height - 25);
         var allView = new Rect(allHolder.x, allHolder.y, allHolder.width - 24f,
-            ((armsHediff.Count + handsHediff.Count + legsHediff.Count + feetHediff.Count) * 24f) + 200);
+            ((armsFiltered.Count() + handsFiltered.Count() + legsFiltered.Count() + feetFiltered.Count()) * 24f) + 200);
 
         var listingStandard = new Listing_Standard();
         Widgets.BeginScrollView(allHolder, ref allViewScroll, allView);
         listingStandard.Begin(allView);
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedArmsName".Translate());
-        foreach (var hediffDef in armsHediff)
+        foreach (var hediffDef in armsFiltered)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -180,7 +201,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
         listingStandard.GapLine();
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedHandsName".Translate());
-        foreach (var hediffDef in handsHediff)
+        foreach (var hediffDef in handsFiltered)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -191,7 +212,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
 
         listingStandard.GapLine();
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedLegsName".Translate());
-        foreach (var hediffDef in legsHediff)
+        foreach (var hediffDef in legsFiltered)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",
@@ -203,7 +224,7 @@ public class ProstheticNoMissingBodyPartsMod : Mod
         listingStandard.GapLine();
 
         listingStandard.Label("ProstheticNoMissingBodyPartsWhitelistedFeetName".Translate());
-        foreach (var hediffDef in feetHediff)
+        foreach (var hediffDef in feetFiltered)
         {
             listingStandard.CheckboxLabeled(
                 $"{hediffDef.label.CapitalizeFirst()} ({hediffDef.defName})",

@@ -7,4 +7,6 @@
   <ProstheticNoMissingBodyPartsWhitelistedHandsName>Erlaubter Handersatz</ProstheticNoMissingBodyPartsWhitelistedHandsName>
   <ProstheticNoMissingBodyPartsWhitelistedLegsName>Erlaubter Beinersatz</ProstheticNoMissingBodyPartsWhitelistedLegsName>
   <ProstheticNoMissingBodyPartsWhitelistedFeetName>Erlaubter Fußersatz</ProstheticNoMissingBodyPartsWhitelistedFeetName>
+  <ProstheticNoMissingBodyPartsSearch>Suche</ProstheticNoMissingBodyPartsSearch>
+  <ProstheticNoMissingBodyPartsSearchTT>Filter auf bionischen Namen, defname und modname</ProstheticNoMissingBodyPartsSearchTT>
 </LanguageData>
