@@ -24,40 +24,6 @@ internal static class ApparelUtility_HasPartsToWear
         // this code run only if original Rimworld check return false (body part is missed)
         // and we try to fix this, if pawn has a bionic part in right place (Bionic Arm, Bionic Leg, etc...)
 
-        // load mod settings with whitelisted bionic parts for arms and legs
-        var settings = LoadedModManager
-            .GetMod<ProstheticNoMissingBodyPartsMod>()
-            .GetSettings<ProstheticNoMissingBodyPartsSettings>();
-
-        // prepare hash sets for quicker checks
-        var armsWhitelist = new HashSet<string>();
-        var legsWhitelist = new HashSet<string>();
-        var handsWhitelist = new HashSet<string>();
-        var feetWhitelist = new HashSet<string>();
-
-        // for arms
-        if (settings.ArmsWhitelist != null)
-        {
-            armsWhitelist.AddRange(settings.ArmsWhitelist);
-        }
-
-        // for legs
-        if (settings.LegsWhitelist != null)
-        {
-            legsWhitelist.AddRange(settings.LegsWhitelist);
-        }
-
-        // for hands
-        if (settings.HandsWhitelist != null)
-        {
-            handsWhitelist.AddRange(settings.HandsWhitelist);
-        }
-
-        // for feet
-        if (settings.FeetWhitelist != null)
-        {
-            feetWhitelist.AddRange(settings.FeetWhitelist);
-        }
 
         // prepare bool set for apparel body part groups
         var isLeftHand = false;
@@ -65,27 +31,27 @@ internal static class ApparelUtility_HasPartsToWear
         var isHands = false;
         var isFeet = false;
 
-        foreach (var groupDefName in apparel.apparel.bodyPartGroups.Select(group => group.defName))
+        foreach (var groupDef in apparel.apparel.bodyPartGroups)
         {
-            if (groupDefName.Equals("LeftHand"))
+            if (groupDef == ModDefOf.LeftHand)
             {
                 isLeftHand = true;
                 break;
             }
 
-            if (groupDefName.Equals("RightHand"))
+            if (groupDef == ModDefOf.RightHand)
             {
                 isRightHand = true;
                 break;
             }
 
-            if (groupDefName.Equals("Hands"))
+            if (groupDef == ModDefOf.Hands)
             {
                 isHands = true;
                 break;
             }
 
-            if (groupDefName.Equals("Feet"))
+            if (groupDef == ModDefOf.Feet)
             {
                 isFeet = true;
                 break;
@@ -93,123 +59,128 @@ internal static class ApparelUtility_HasPartsToWear
 
             var body = p.def.race.body.AllParts;
 
-            if (BodyPartUtils.ExistsByGroupAndParent(body, "Shoulder", groupDefName))
+            if (BodyPartUtils.ExistsByGroupAndParent(body, ModDefOf.Shoulder, groupDef))
             {
                 isHands = true;
                 break;
             }
 
-            if (!BodyPartUtils.ExistsByGroupAndParent(body, "Leg", groupDefName))
+            if (BodyPartUtils.ExistsByGroupAndParent(body, ModDefOf.Leg, groupDef))
             {
-                continue;
+                isFeet = true;
+                break;
             }
 
-            isFeet = true;
-            break;
+            continue;
         }
 
         var hediffs = p.health.hediffSet.hediffs;
-        // check if apparel needed left hand, especially for jewelry mod, pawns try to wear bracer... on fingers... omg...
-        if (isLeftHand)
+        // check if apparel needed left/right hand, especially for jewelry mod, pawns try to wear bracer... on fingers... omg...
+        if (isLeftHand || isRightHand)
         {
-            __result = hediffs.Exists(h =>
+            var part = isLeftHand ? ModDefOf.LeftHand : ModDefOf.RightHand;
+            foreach (var h in hediffs)
             {
-                if (h.Part?.customLabel == null || h.def?.defName == null)
+                if (h.Part?.def == null || h.def == null)
                 {
-                    return false;
+                    continue;
                 }
 
-                // true if left arm replaced with whitelisted bionic part
-                if (HarmonyPatches.ShoulderDefNames.Contains(h.Part.def.defName))
+                // true if arm replaced with whitelisted bionic part
+                if (ModDefOf.ShoulderDefs.Contains(h.Part.def))
                 {
-                    return armsWhitelist.Contains(h.def.defName) &&
-                           BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
+                    if (ModDefOf.ArmsAllowHediffDefs.Contains(h.def) && BodyPartUtils.ExistsDeep(h.Part, part))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
                 }
 
-                // true if left hand replaced with whitelisted bionic part
-                if (HarmonyPatches.HandDefNames.Contains(h.Part.def.defName))
+                // true if hand replaced with whitelisted bionic part
+                if (ModDefOf.HandDefs.Contains(h.Part.def))
                 {
-                    return handsWhitelist.Contains(h.def.defName) &&
-                           BodyPartUtils.ExistsDeep(h.Part, "LeftHand");
+                    if (ModDefOf.HandsAllowHediffDefs.Contains(h.def) && BodyPartUtils.ExistsDeep(h.Part, part))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
                 }
+            }
 
-                return false;
-            });
-            return;
-        }
-
-        // check if apparel needed right hand, especially for jewelry, wearing rings?
-        if (isRightHand)
-        {
-            __result = hediffs.Exists(h =>
-            {
-                if (h.Part?.customLabel == null || h.def?.defName == null)
-                {
-                    return false;
-                }
-
-                // true if right arm replaced with whitelisted bionic part
-                if (HarmonyPatches.ShoulderDefNames.Contains(h.Part.def.defName))
-                {
-                    return armsWhitelist.Contains(h.def.defName) &&
-                           BodyPartUtils.ExistsDeep(h.Part, "RightHand");
-                }
-
-                // true if right hand replaced with whitelisted bionic part
-                if (HarmonyPatches.HandDefNames.Contains(h.Part.def.defName))
-                {
-                    return handsWhitelist.Contains(h.def.defName) &&
-                           BodyPartUtils.ExistsDeep(h.Part, "RightHand");
-                }
-
-                return false;
-            });
             return;
         }
 
         // check if apparel needed hands, useful for gloves
         if (isHands)
         {
-            __result = hediffs.Exists(h =>
+            foreach (var h in hediffs)
             {
-                if (h.Part?.def?.defName == null || h.def?.defName == null)
+                if (h.Part?.def == null || h.def == null)
                 {
-                    return false;
+                    continue;
                 }
 
                 // true if arm replaced with whitelisted bionic part
-                if (HarmonyPatches.ShoulderDefNames.Contains(h.Part.def.defName))
+                if (ModDefOf.ShoulderDefs.Contains(h.Part.def))
                 {
-                    return armsWhitelist.Contains(h.def.defName);
+                    if (ModDefOf.ArmsAllowHediffDefs.Contains(h.def))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
                 }
 
                 // true if hand replaced with whitelisted bionic part
-                return HarmonyPatches.HandDefNames.Contains(h.Part.def.defName) &&
-                       handsWhitelist.Contains(h.def.defName);
-            });
+                if (ModDefOf.HandDefs.Contains(h.Part.def))
+                {
+                    if (ModDefOf.HandsAllowHediffDefs.Contains(h.def))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
+                }
+            }
+
             return;
         }
 
         // check if apparel needed feet, useful for boots
         if (isFeet)
         {
-            __result = hediffs.Exists(h =>
+            foreach (var h in hediffs)
             {
-                if (h.Part?.def?.defName == null || h.def?.defName == null)
+                if (h.Part?.def == null || h.def == null)
                 {
-                    return false;
+                    continue;
                 }
 
-                // true if leg replaced with whitelisted bionic part
-                if (HarmonyPatches.LegDefNames.Contains(h.Part.def.defName))
+                // true if arm replaced with whitelisted bionic part
+                if (ModDefOf.LegDefs.Contains(h.Part.def))
                 {
-                    return legsWhitelist.Contains(h.def.defName);
+                    if (ModDefOf.LegsAllowHediffDefs.Contains(h.def))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
                 }
 
-                // true if foot replaced with whitelisted bionic part
-                return HarmonyPatches.FootDefNames.Contains(h.Part.def.defName) &&
-                       feetWhitelist.Contains(h.def.defName);
-            });
+                // true if hand replaced with whitelisted bionic part
+                if (ModDefOf.FootDefs.Contains(h.Part.def))
+                {
+                    if (ModDefOf.FeetAllowHediffDefs.Contains(h.def))
+                    {
+                        __result = true;
+                        return;
+                    }
+                    continue;
+                }
+            }
+
             return;
         }
 
